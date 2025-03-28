@@ -3,8 +3,9 @@ return {
     'echasnovski/mini.nvim',
     version = '*',
     config = function()
-      local statusline = require 'mini.statusline'
-      statusline.setup { use_icons = true }
+      require('mini.indentscope').setup()
+      require('mini.statusline').setup()
+      require('mini.pairs').setup()
     end
   }
 }
