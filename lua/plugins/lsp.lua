@@ -4,7 +4,11 @@ return {
     dependencies = { 'saghen/blink.cmp' },
     config = function()
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      require'lspconfig'.csharp_ls.setup { capabilities = capabilities }
+      require('lspconfig').csharp_ls.setup({ capabilities = capabilities })
+      require('lspconfig').ts_ls.setup({
+	cmd = { 'typescript-language-server', '--stdio' },
+	capabilities = capabilities
+      })
 
       -- Format buffer on save
       vim.api.nvim_create_autocmd('LspAttach', {
