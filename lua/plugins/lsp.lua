@@ -10,7 +10,7 @@ return {
 	capabilities = capabilities
       })
 
-      -- Format buffer on save
+      -- Setup format-on-write and some keymaps on LSP Attach
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
           local c = vim.lsp.get_client_by_id(args.data.client_id)
@@ -22,6 +22,13 @@ return {
 	      vim.lsp.buf.format({ bufnr = args.buf, id = c.id })
 	    end,
 	  })
+
+	  vim.keymap.set("n", "grn", vim.lsp.buf.rename, { buffer = 0 })
+	  vim.keymap.set("n", "grr", vim.lsp.buf.references, { buffer = 0 })
+	  vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { buffer = 0 })
+	  vim.keymap.set("n", "grd", vim.lsp.buf.definition, { buffer = 0 })
+	  vim.keymap.set("n", "gri", vim.lsp.buf.implementation, { buffer = 0 })
+	  vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<Return>", { buffer = 0 })
         end,
       })
     end
