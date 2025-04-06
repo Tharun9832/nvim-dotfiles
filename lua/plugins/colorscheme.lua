@@ -1,11 +1,14 @@
 return {
   { 
-    "rebelot/kanagawa.nvim",
-    config = function() 
-      require("kanagawa").setup({
-	transparent = true
+    'projekt0n/github-nvim-theme',
+    name = 'github-theme',
+    config = function()
+      require('github-theme').setup({
+	options = {
+	  transparent = true
+	}
       })
-      vim.cmd("colorscheme kanagawa-dragon")
+      vim.cmd('colorscheme github_dark_default')
     end
   }
 }
