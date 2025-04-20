@@ -10,12 +10,12 @@ return {
 	capabilities = capabilities
       })
 
-      -- Setup format-on-write and some keymaps on LSP Attach
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
           local c = vim.lsp.get_client_by_id(args.data.client_id)
           if not c then return end
 
+	  -- Format on save
 	  vim.api.nvim_create_autocmd('BufWritePre', {
 	    buffer = args.buf,
 	    callback = function()
@@ -23,6 +23,10 @@ return {
 	    end,
 	  })
 
+	  -- Show diagnostic text
+	  vim.diagnostic.config({ virtual_lines = true })
+
+	  -- Setup some keymaps
 	  vim.keymap.set("n", "grn", vim.lsp.buf.rename, { buffer = 0 })
 	  vim.keymap.set("n", "grr", vim.lsp.buf.references, { buffer = 0 })
 	  vim.keymap.set("n", "gra", vim.lsp.buf.code_action, { buffer = 0 })
